@@ -8,12 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var entryTicket = TicketModel("Giriş", 20)
+    @ObservedObject var entryWithAlcoholTicket = TicketModel("Alkollu Giriş", 50)
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            VStack {
+                TicketView(ticketModel: entryTicket)
+                Divider().background(.red)
+                TicketView(ticketModel: entryWithAlcoholTicket)
+                Divider().background(.red)
+                Text("Toplam Para: \(entryTicket.totalTicketPrice + entryWithAlcoholTicket.totalTicketPrice)")
+            }
+            .font(.system(size: 25))
         }
         .padding()
     }
