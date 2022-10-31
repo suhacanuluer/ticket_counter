@@ -22,6 +22,7 @@ class TicketModel: TicketViewModel {
     
     func reset() {
         ticketCount = 0
+        totalTicketPrice = 0
     }
     
     func sell() {
