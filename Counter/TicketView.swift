@@ -12,22 +12,30 @@ struct TicketView<Model>: View where Model: TicketViewModel{
     @ObservedObject var ticketModel: Model
     
     var body: some View {
-        Text(ticketModel.ticketName + ": " + String(ticketModel.ticketCount))
-        HStack {
-            Button(action: { ticketModel.revoke() }) {
-                Image(systemName: "minus.square")
-                    .font(.system(size: 40))
-                    .foregroundColor(.red)
-            }.padding()
-            Spacer()
-            Text("Kasa: \(ticketModel.totalTicketPrice)")
-            Spacer()
-            Button(action: { ticketModel.sell() }
+        VStack {
+            Text(ticketModel.ticketName + ": " + String(ticketModel.ticketCount))
+            HStack {
+                Button(action: { ticketModel.revoke() }) {
+                    Image(systemName: "minus.square")
+                        .font(.system(size: 40))
+                        .foregroundColor(.red)
+                }.padding()
+                Spacer()
+                Text("Kasa: \(ticketModel.totalTicketPrice)")
+                Spacer()
+                Button(action: { ticketModel.sell() }
+                ) {
+                    Image(systemName: "plus.square")
+                        .font(.system(size: 40))
+                        .foregroundColor(.green)
+                }.padding()
+            }
+            // todo: resete tıklayınca emin misin? popup çıkacak
+            Button(action: { ticketModel.reset() }
             ) {
-                Image(systemName: "plus.square")
-                    .font(.system(size: 40))
-                    .foregroundColor(.green)
-            }.padding()
+                Text("Reset")
+                    .foregroundColor(.blue)
+            }
         }
     }
 }
